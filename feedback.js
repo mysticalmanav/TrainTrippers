@@ -41,10 +41,7 @@ setTimeout(()=>{
 
 });
 
-window.addEventListener('resize', function () {
-    "use strict";
-    window.location.reload();
-  });
+ 
   if(screen.width<1024){
     document.getElementsByTagName("body")[0].innerHTML=`<body>
     <!-- navigation bar html -->
