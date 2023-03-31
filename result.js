@@ -1,8 +1,4 @@
-window.addEventListener('resize', function () {
-  "use strict";
-  window.location.reload();
-});
-if (screen.width <= 1023) {
+ if (screen.width <= 1023) {
   document.getElementById('head').innerHTML=` 
   <div class="d-flex-column w-100"> <div class="d-flex w-100"><div class="d-flex mx-auto o-h"><div class="inline-block p-1 rounded m-1 mx-2" id="fromdiv">
      <span class="text-primary">From</span>
