@@ -1,7 +1,4 @@
-window.addEventListener('resize', function () { 
-    "use strict";
-    window.location.reload(); 
-});
+ 
 if(screen.width<455){
   document.getElementById('signupModalLabel').classList.remove('mx-5');
   document.getElementById('signupModalLabel2').classList.remove('mx-5');
