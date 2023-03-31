@@ -23,7 +23,14 @@
      
      
  `;
-
+ document.getElementById('ftr').innerHTML=` <div class="text-center pb-3" id="lg-h">
+  <img src="pngfind.com-facebook-icon-white-png-1744532.png" class="logos-f me-5"  alt="">
+  <img src="pngfind.com-instagram-png-white-2773517 (1).png" class="logos-i" alt="">
+  </div>
+    <div class="d-inline-block bold"> &copy; 2023 TrainTrippers All rights reserved
+      <br> <div class="d-inline-block text-light fw-light f-s bold float-end"> Designed and built with all the love in the world by <a href="https://www.instagram.com/mysticalmanav/">Manav</a>.
+      </div>
+    </div>`;
  document.getElementById('bckbtn').classList.add('me-5');
  document.getElementById('main-c').classList.remove('px-5');
  document.getElementById('main-c').classList.remove('py-3');
