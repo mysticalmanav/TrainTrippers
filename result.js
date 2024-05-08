@@ -433,7 +433,7 @@ function gettrains(i) {
 
          lng = data.results[0].geometry.lng;
          console.log(lng);
-         fetch('https://api.opentripmap.com/0.1/en/places/radius?radius=300000&lon='+lng+'&lat='+lat+'&kinds=interesting_places&&rate=3&limit=24&apikey=5ae2e3f221c38a28845f05b69c2169c9a9bfa0f1d67e7e97600d6f3d')
+         fetch('https://api.opentripmap.com/0.1/en/places/radius?radius=100000&lon='+lng+'&lat='+lat+'&kinds=interesting_places&&rate=3&limit=24&apikey=5ae2e3f221c38a28845f05b69c2169c9a9bfa0f1d67e7e97600d6f3d')
          .then(response=>response.json())
          .then((data)=>{
            console.log(data);
