@@ -164,24 +164,27 @@ function formatTime(time24) {
 function structuredata(arr, index,date,d) {
   var s = date.toDateString();
   var day = s.substr(0,3);
-  var srr=[];
+   
   var t = d.replace("-","");
   t = t.replace("-","");
   console.log(d);
   console.log(t);
-  for(var i=0; i<7; i++){
-    if(arr.running_days[i]=='1'){
-       srr[i] = 'available';
-    }
-    else{
-        srr[i] = 'not-available';
-    }
+  const run_days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const available_days = arr.run_days; // Assume this is the array from the API response
+let srr = [];
+
+for (let i = 0; i < run_days.length; i++) {
+  if (available_days.includes(run_days[i])) {
+    srr[i] = 'available';
+  } else {
+    srr[i] = 'not-available';
   }
+}
   let a;
   if(screen.width>=1024){
-          a = ' <div class="t d-flex-column my-3" id="t-' + index + '"><div class="d-flex w-100 bg-light rounded border p-3ō"> <div class="d-inline-block"> <div class="d-inline-block ms-4 mt-3 t-nam">' + arr.train_name + '</div><br><div class="d-inline-block ms-4 my-3 tr-n" >#' + arr.train_no + ' &nbsp; | &nbsp; Departs on </div><div class="d-inline-block ms-2 my-1 day-arr"><b class="'+srr[0]+'">S </b><b class="'+srr[1]+'">M </b><b class="'+srr[2]+'">T </b><b class="'+srr[3]+'">W </b><b class="'+srr[4]+'">T </b><b class="'+srr[5]+'">F </b><b class="'+srr[6]+'">S </b></div></div> <div class="d-flex jrn-t mx-auto"> <div class="d-flex-column arr m-2 mt-3"><div class="arr-time">' + formatTime(arr.from_time)+', '+day + '</div><div class="arr-stn my-2">' + arr.from_stn_name + ' ' + arr.from_stn_code + '</div></div>  <div ><hr class="mx-2"></div><div class="dur">' + converttime(arr.travel_time) + '</div><div ><hr class="mx-2"></div>    <div class="d-flex-column dst m-2 mt-3"><div class="dst-time">' + formatTime((arr.to_time)) + ', '+(day2(d,arr.travel_time,arr.from_time,arr.to_time).substr(0,3)) + '</div><div class="dst-stn my-2" >' + arr.to_stn_name + ' ' + arr.to_stn_code + '</div> </div></div><div class="me-5 my-auto bold"><a href="https://www.makemytrip.com/railways/listing?classCode=CC&className=AC%20Chair%20Car&date='+t+'&destStn='+arr.to_stn_code+'&srcStn='+arr.from_stn_code+'"><button class="bold btn-tt rounded btn">Book Tickets</button></a></div><div></div>'}
+          a = ' <div class="t d-flex-column my-3" id="t-' + index + '"><div class="d-flex w-100 bg-light rounded border p-3ō"> <div class="d-inline-block"> <div class="d-inline-block ms-4 mt-3 t-nam">' + arr.train_name + '</div><br><div class="d-inline-block ms-4 my-3 tr-n" >#' + arr.train_number + ' &nbsp; | &nbsp; Departs on </div><div class="d-inline-block ms-2 my-1 day-arr"><b class="'+srr[0]+'">S </b><b class="'+srr[1]+'">M </b><b class="'+srr[2]+'">T </b><b class="'+srr[3]+'">W </b><b class="'+srr[4]+'">T </b><b class="'+srr[5]+'">F </b><b class="'+srr[6]+'">S </b></div></div> <div class="d-flex jrn-t mx-auto"> <div class="d-flex-column arr m-2 mt-3"><div class="arr-time">' + formatTime(arr.from_sta)+', '+day + '</div><div class="arr-stn my-2">' + arr.from_station_name + ' ' + arr.from + '</div></div>  <div ><hr class="mx-2"></div><div class="dur">' + converttime(arr.duration) + '</div><div ><hr class="mx-2"></div>    <div class="d-flex-column dst m-2 mt-3"><div class="dst-time">' + formatTime((arr.to_sta)) + ', '+(day2(d,arr.duration,arr.from_sta,arr.to_sta).substr(0,3)) + '</div><div class="dst-stn my-2" >' + arr.to_station_name + ' ' + arr.to + '</div> </div></div><div class="me-5 my-auto bold"><a href="https://www.makemytrip.com/railways/listing?classCode=CC&className=AC%20Chair%20Car&date='+t+'&destStn='+arr.to+'&srcStn='+arr.from+'"><button class="bold btn-tt rounded btn">Book Tickets</button></a></div><div></div>'}
           else{
-            a = ' <div class="t d-flex-column my-3 w-100" id="t-' + index + '"><div class=" w-100 bg-light rounded border p-3ō"> <div class="d-flex"> <div class="mt-1 ms-2 t-nam">' + arr.train_name + '</div><br><div class="d-flex ms-auto me-2"><div class="d-flex my-3 tr-n ms-2" >#' + arr.train_no + ' &nbsp; | &nbsp; </div><div class="d-flex-column"><div class= "mt-3 mb-1 tr-n">Departs on </div><div class="day-arr"><b class="'+srr[0]+'">S </b><b class="'+srr[1]+'">M </b><b class="'+srr[2]+'">T </b><b class="'+srr[3]+'">W </b><b class="'+srr[4]+'">T </b><b class="'+srr[5]+'">F </b><b class="'+srr[6]+'">S </b></div></div></div> </div><div class="d-flex jrn-t mx-auto"> <div class="d-flex-column arr me-1 mb-2 ms-1 mt-3"><div class="arr-time">' + formatTime(arr.from_time)+', '+day + '</div><div class="arr-stn my-2">' + arr.from_stn_name + ' ' + arr.from_stn_code + '</div></div>  <div ><hr class="me-1"></div><div class="dur">' + converttime(arr.travel_time) + '</div><div ><hr class="ms-1"></div>    <div class="d-flex-column dst ms-1 mb-2 me-1 mt-3"><div class="dst-time">' + formatTime((arr.to_time)) + ', '+(day2(d,arr.travel_time,arr.from_time,arr.to_time).substr(0,3)) + '</div><div class="dst-stn my-2" >' + arr.to_stn_name + ' ' + arr.to_stn_code + '</div> </div></div><div class="p-2 my-auto bold text-end"><a href="https://www.makemytrip.com/railways/listing?classCode=CC&className=AC%20Chair%20Car&date='+t+'&destStn='+arr.to_stn_code+'&srcStn='+arr.from_stn_code+'"><button class="bold btn-tt rounded btn ms-auto">Book Tickets</button></a></div></div></div>'
+            a = ' <div class="t d-flex-column my-3 w-100" id="t-' + index + '"><div class=" w-100 bg-light rounded border p-3ō"> <div class="d-flex"> <div class="mt-1 ms-2 t-nam">' + arr.train_name + '</div><br><div class="d-flex ms-auto me-2"><div class="d-flex my-3 tr-n ms-2" >#' + arr.train_number + ' &nbsp; | &nbsp; </div><div class="d-flex-column"><div class= "mt-3 mb-1 tr-n">Departs on </div><div class="day-arr"><b class="'+srr[0]+'">S </b><b class="'+srr[1]+'">M </b><b class="'+srr[2]+'">T </b><b class="'+srr[3]+'">W </b><b class="'+srr[4]+'">T </b><b class="'+srr[5]+'">F </b><b class="'+srr[6]+'">S </b></div></div></div> </div><div class="d-flex jrn-t mx-auto"> <div class="d-flex-column arr me-1 mb-2 ms-1 mt-3"><div class="arr-time">' + formatTime(arr.from_sta)+', '+day + '</div><div class="arr-stn my-2">' + arr.from_station_name + ' ' + arr.from + '</div></div>  <div ><hr class="me-1"></div><div class="dur">' + converttime(arr.duration) + '</div><div ><hr class="ms-1"></div>    <div class="d-flex-column dst ms-1 mb-2 me-1 mt-3"><div class="dst-time">' + formatTime((arr.to)) + ', '+(day2(d,arr.travel_time,arr.from_sta,arr.to).substr(0,3)) + '</div><div class="dst-stn my-2" >' + arr.to_station_name + ' ' + arr.to_stn_code + '</div> </div></div><div class="p-2 my-auto bold text-end"><a href="https://www.makemytrip.com/railways/listing?classCode=CC&className=AC%20Chair%20Car&date='+t+'&destStn='+arr.to+'&srcStn='+arr.from+'"><button class="bold btn-tt rounded btn ms-auto">Book Tickets</button></a></div></div></div>'
           }
   return a;
 }
@@ -392,15 +395,19 @@ function gettrains(i) {
   console.log(place);
 
 
- if(a!=-1&&b!=-1){ let p = fetch('https://railway-w6eh.onrender.com/proxy?from=' + from + '&to=' + to + '&date=' + d);
-  p.then((value) => {
-    return value.json();
-  })
-    .then((trains) => {
+ if(a!=-1&&b!=-1){ let p = fetch(`https://irctc1.p.rapidapi.com/api/v3/trainBetweenStations?fromStationCode=${from}&toStationCode=${to}&dateOfJourney=${date}`, {
+  method: 'GET',
+  headers: {
+    'x-rapidapi-key': '6d9cc1171bmsh218628218599d9fp1983edjsn0448d4305f23',
+    'x-rapidapi-host': 'irctc1.p.rapidapi.com'
+  }
+})
+.then(response => response.json())
+.then((trains) => {
        (trains.data).forEach((train, index) => {
         
         console.log(train);
-        let c = structuredata(train.train_base, index,s,d);
+        let c = structuredata(train, index,s,d);
          updatedata(c);
          
 
